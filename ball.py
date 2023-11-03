@@ -1,49 +1,49 @@
+# this is statments that we need to use some libraries for window drawing and system utils
+# google "python modules" "importing python modules" "popular python modules"
 import pygame
 import sys
 
-# Initialize Pygame
+# our ball variables
+windowHeight = 600
+windowWidth = 800
+
+ballRadius = 20
+ballPosX = windowWidth // 2
+ballPosY = windowHeight // 2
+ballSpeedX = 5
+ballSpeedY = 5
+
+# inititalize window using library
+# tell pygame that we want to start using it
+# u can google what for pygame is needed
 pygame.init()
-
-# Constants
-WIDTH, HEIGHT = 800, 600
-BALL_RADIUS = 20
-BALL_COLOR = (255, 0, 0)
-BACKGROUND_COLOR = (0, 0, 0)
-BALL_SPEED_X = 5
-BALL_SPEED_Y = 5
-
-# Create the window
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((windowWidth, windowHeight))
 pygame.display.set_caption("Bouncing Ball")
 
-# Initialize ball position and speed
-ball_x = WIDTH // 2
-ball_y = HEIGHT // 2
-ball_speed_x = BALL_SPEED_X
-ball_speed_y = BALL_SPEED_Y
 
 # Main game loop
 while True:
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
     # Update ball position
-    ball_x += ball_speed_x
-    ball_y += ball_speed_y
+    ballPosX += ballSpeedX
+    ballPosY += ballSpeedY
 
     # Bounce the ball off the edges
-    if ball_x + BALL_RADIUS > WIDTH or ball_x - BALL_RADIUS < 0:
-        ball_speed_x = -ball_speed_x
-    if ball_y + BALL_RADIUS > HEIGHT or ball_y - BALL_RADIUS < 0:
-        ball_speed_y = -ball_speed_y
+    if ballPosX + ballRadius > windowWidth or ballPosX - ballRadius < 0:
+        ballSpeedX = -ballSpeedX
+    if ballPosY + ballRadius > windowHeight or ballPosY - ballRadius < 0:
+        ballSpeedY = -ballSpeedY
 
     # Clear the screen
-    screen.fill(BACKGROUND_COLOR)
+    screen.fill((0, 0, 0))
 
     # Draw the ball
-    pygame.draw.circle(screen, BALL_COLOR, (ball_x, ball_y), BALL_RADIUS)
+    pygame.draw.circle(screen, (255, 0, 0), (ballPosX, ballPosY), ballRadius)
 
     # Update the display
     pygame.display.flip()
